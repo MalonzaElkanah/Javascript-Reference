@@ -1,7 +1,11 @@
 /* 	1. Comments
-	2.Variables, 
-	3.data types, 
-	3.functions, 
+	2. Variables, 
+	3. data types, 
+	4. Operators 
+	5. Conditional Statements
+	6. LOOPS
+	7. Equality
+	8. JavaScript types
 */
 
 
@@ -313,7 +317,7 @@ if (condition1) {
 } else if (condition3) {
 	statement3
 }
-..
+//..
 } else {
 	statementN
 }
