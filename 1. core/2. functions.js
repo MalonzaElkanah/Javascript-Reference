@@ -1,12 +1,34 @@
 /* 	1. Functions
-	2. Scoping 
+		1.1. Function literals
+		1.2. Functions as data
 
-	3. data types, 
-	4. Operators 
-	5. Conditional Statements
-	6. LOOPS
-	7. Equality
-	8. JavaScript types
+	2. Scoping 
+		2.1 Global scope
+		2.2 Local scope
+		2.3 IIFE(Immediately Invoked Function Expression)
+		2.4 Inline function expressions
+		2.5 Block scope
+		2.6 difference between the two types of declarations(functional and expression)
+
+	3. The arguments parameter 
+
+	4. Method 
+
+	5. Anonymous functions
+		5.1 A.F - creating an object
+		5.2 A.F - creating a list
+		5.3 A.F - parameter to another function
+		5.2 A.F - conditional logic
+
+	6. Closures
+
+	7. Timers and callbacks
+
+	8. Private variables
+
+	9. Loops and Closures
+
+	10 Modules
 */
 
 
@@ -262,5 +284,167 @@ person.greet();
 
 
 // 5. Anonymous functions
+//used in cases where the function doesn't need to have a name for later reference
+
+	
+	//5.1 A.F - creating an object
+var santa = {
+	say :function(){
+		console.log("ho ho ho");
+	}
+}
+santa.say();
 
 
+	//5.2 A.F - creating a list
+	//creating anonymous functions and adding them to an array.
+var things = [
+	function() { alert("ThingOne") },
+	function() { alert("ThingTwo") },
+];
+for(var x=0; x<things.length; x++) {
+	things[x]();
+}
+
+
+	//5.3 A.F - parameter to another function
+// function statement
+function eventHandler(event){
+	event();
+}
+eventHandler(function(){
+	//do a lot of event related things
+	console.log("Event fired");
+});
+
+
+
+	//5.4 A.F - conditional logic
+var shape;
+if(shape_name === "SQUARE") {
+	shape = function() {
+		return "drawing square";
+	}
+} else {
+	shape = function() {
+		return "drawing square";
+	}
+}
+alert(shape());
+
+
+
+//6. Closures
+/*closure is the scope created when a function is declared that allows the
+function to access and manipulate variables that are external to this function*/
+
+
+var outer='outer';
+var copy;
+function outerFn() {
+	var inner='inner';
+	function innerFn(param){
+		console.log(outer);
+		console.log(inner);
+		console.log(param);
+		console.log(magic);
+	}
+	copy=innerFn;
+}
+console.log(magic); //ERROR: magic not defined
+var magic="Magic";
+outerFn();
+copy("copy");
+
+/*All variables in an outer scope are included even if they are declared after the function is declared. 
+This makes it possible for the line, console.log(magic) , in innerFn() , to work.*/
+
+
+//7. Timers and callbacks
+function delay(message) {
+	setTimeout( function timerFn(){
+		console.log( message );
+	}, 1000 );
+}
+delay( "Hello World" );
+//We pass the inner timerFn() function to the built-in library function, setTimeout() .
+
+
+
+//8. Private variables
+//Closures are frequently used to encapsulate some information as private variables.
+function privateTest(){
+	var points=0;
+	this.getPoints=function(){
+		return points;
+	};
+	this.score=function(){
+		points++;
+	};
+}
+var private = new privateTest();
+private.score();
+console.log(private.points); // undefined
+console.log(private.getPoints());
+
+
+
+
+//9. Loops and closures
+
+//Below code prints 6 , 6 , 6 , 6 , 6 at an interval of 100 ms instead of 1, 2, 3, 4, 5
+for (var i=1; i<=5; i++) {
+	setTimeout( function delay(){
+		console.log( i );
+	}, i*100);
+}
+//the timeout function callbacks are running after the completion of the loop
+
+//FIX: We can introduce a function scope and local copy of the i variable in that scope.
+for (var i=1; i<=5; i++) {
+	(function(j){
+		setTimeout( function delay(){
+			console.log( j );
+		}, j*100);
+	})( i );
+}
+
+
+
+//10 Modules
+/*Modules are used to mimic classes and focus on public and private access to
+variables and functions.*/
+Var moduleName=function() {
+	//private state
+	//private functions
+	return {
+		//public state
+		//public variables
+	}
+}
+
+//condions
+	/* 	1. There must be an outer enclosing function that needs to be executed at least once.
+
+		2.This enclosing function must return at least one inner function. 
+		This is necessary to create a closure over the private state—without this, you can't
+		access the private state at all*/
+
+
+//example
+var superModule = (function (){
+	var secret = 'supersecretkey';
+	var passcode = 'nuke';
+	function getSecret() {
+		console.log( secret );
+	}
+	function getPassCode() {
+		console.log( passcode );
+	}
+	return {
+		getSecret: getSecret,
+		getPassCode: getPassCode
+	};
+})();
+superModule.getSecret();
+superModule.getPassCode();
