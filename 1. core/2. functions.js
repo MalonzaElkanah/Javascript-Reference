@@ -84,6 +84,15 @@ var looper = function(x){
 for(var i=1;i<10;i++){
 	looper(i);
 } //prints 1 , 2 , 3 , 4 , 6 , 7 , 8 , and 9 , and not 5
+		
+
+		//Default parameters
+function sum(a=0, b=0){
+return (a+b);
+}
+console.log(sum(9,9)); //18
+console.log(sum(9));//9
+
 
 
 
