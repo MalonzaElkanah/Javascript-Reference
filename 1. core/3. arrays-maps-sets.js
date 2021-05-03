@@ -145,7 +145,9 @@ console.log(a.lastIndexOf('z')); // -1
 
 
 //2. Maps
-	//A map is a simple key-value map and can iterate its elements in the order of their insertion
+
+	//2.1 Introduction
+		//A map is a simple key-value map and can iterate its elements in the order of their insertion
 var founders = new Map();
 founders.set("facebook", "mark");
 founders.set("google", "larry");
@@ -154,9 +156,36 @@ founders.get("twitter"); // undefined
 founders.has("yahoo"); // false
 for (var [key, value] of founders) {
 	console.log(key + " founded by " + value);
-}
-// "facebook founded by mark"
-// "google founded by larry"
+}// "facebook founded by mark"  // "google founded by larry"
+
+		//You can initialize the map while declaring it:
+let m = new Map([
+	[ 1, 'Albert' ],
+	[ 2, 'Douglas' ],
+	[ 3, 'Clive' ],
+]);
+
+		//iterate over the entries in the Map, you can use the entries() function
+for (let a of m2.entries()){
+	console.log(a);
+}//[1,"Albert"] [2,"Douglas"][3,"Clive"]
+
+		//iterate through all the keys using the keys() function 
+for (let a of m2.keys()){
+	console.log(a);
+} //1 2 3
+
+		//you can iterate through the values of the Map using the values() function:
+for (let a of m2.values()){
+	console.log(a);
+}//Albert Douglas Clive
+
+
+	//2.2 Weak Maps
+		//WeakMap does not prevent its keys from being garbage-collected. 
+		//Keys for a WeakMap must be objects and the valuescan be arbitrary values. 
+		//While a WeakMap behaves in the same way as a normal Map, 
+		//you cannot iterate through it and you can't clear it.
 
 
 //3. Sets
@@ -172,3 +201,39 @@ mySet.size; // 2
 for (let item of mySet) console.log(item);
 // 1
 // "Howdy"
+
+let x = {'first': 'Albert'};
+let s = new Set([1,2,'Sunday',x]);
+console.log(s.has(x)); //true
+s.add(300);
+console.log(s); 
+//[1,2,"Sunday",{"first":"Albert"},300]
+
+for (let a of s.entries()){
+	console.log(a);
+}
+//[1,1]
+//[2,2]
+//["Sunday","Sunday"]
+//[{"first":"Albert"},{"first":"Albert"}]
+//[300,300]
+
+for (let a of s.keys()){
+	console.log(a);
+}
+//1
+//2
+//Sunday
+//{"first":"Albert"}
+//300
+
+for (let a of s.values()){
+	console.log(a);
+}
+//1
+//2
+//Sunday
+//{"first":"Albert"}
+//300
+
+

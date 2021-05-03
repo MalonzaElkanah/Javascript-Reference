@@ -1,11 +1,20 @@
 /* 	1. Comments
+
 	2. Variables, 
+
 	3. data types, 
+
 	4. Operators 
+
 	5. Conditional Statements
+
 	6. LOOPS
-	7. Equality
-	8. JavaScript types
+
+	7. Iterators
+
+	8. Equality
+
+	9. JavaScript types
 */
 
 
@@ -162,9 +171,11 @@ if(oBooleanFalse.valueOf()){
 	console.log("Without valueOf, I am still truthy");
 }//"Without valueOf, I am still truthy"
 
-
 			// 3.1.5 Symbol
-//Symbol()
+//A Symbol is guaranteed to be unique and immutable.
+let s = Symbol();
+console.log(typeof s); //symbol
+
 
 
 	//3.2 Non-primitive - Object, Array, Date
@@ -386,10 +397,40 @@ var arr = [10, 20, 30];
 for (i = 0; i < arr.length; arr[i++] = 100);
 console.log(arr);
 
+//for..in :
+	//for..in loop, you can iterate over indexes of the list array
+array.
+var list = ['Sunday','Monday','Tuesday'];
+for (let i in list){
+console.log(i); //0 1 2
+}
 
-//7 Equality
+//for..of 
+	//for..of loop lets you iterate over the values stored in the list
+for (let i of list){
+console.log(i); //Sunday Monday Tuesday
+}
 
-	// 7.1 loose equality(==)
+
+
+
+//7. Iterators
+	//iterators have a next() method that returns an object. The returning object has two properties— 
+		//value (the next value) and 
+		//done (indicates whether the last result has been reached)
+var a = [1,2];
+var i = a[Symbol.iterator]();
+console.log(i.next());
+// { value: 1, done: false }
+console.log(i.next());
+// { value: 2, done: false }
+console.log(i.next());
+// { value: undefined, done: true }
+
+
+//8 Equality
+
+	// 8.1 loose equality(==)
 //perform the type conversion when comparing two values
 
 "" == "0" //false
@@ -402,13 +443,12 @@ false == null //false
 null == undefined //true
 
 
-	// 7.2 strict equality
+	// 8.2 strict equality
 //check the values without any type conversion.
 // #If the values are of a different type, they are unequal.
 // #For non-numerical values of the same type, they are equal if their values are the same.
 // #For primitive numbers, strict equality works for values. If the values are the same, === results in true. 
 // #However, a NaN doesn't equal to any number.
-
 
 "" === "0" //false
 0 === ""// false
@@ -426,13 +466,15 @@ var bar = {};
 bar === bar; //true
 
 
-//8 JavaScript types
-	// 8.1 toString()
+
+//9 JavaScript types
+	// 9.1 toString()
 	//convert an entity to a String 
 var fortyTwo = 42;
 console.log(fortyTwo.toString()[1]); //prints "2"
 
-	//8.2 toNumber()
+
+	//9.2 toNumber()
 	//convert an entity to a Number
 //convert true becomes 1 
 //undefined becomes NaN
@@ -440,11 +482,11 @@ console.log(fortyTwo.toString()[1]); //prints "2"
 //null becomes 0 . 
 //if strings fails, the method returns NaN .
 
-	//8.3 toBoolean()
+	//9.3 toBoolean()
 	//convert an entity to a Boolean
 
 
-	//8.4 typeof operator
+	//9.4 typeof operator
 	// check javascript type of an entity
 typeof 1; //"number"
 typeof "1"; //"string"
@@ -458,3 +500,5 @@ f = function test() {
 }
 typeof f; //"function"
 typeof [1,2,3,4]; //"object"
+
+
