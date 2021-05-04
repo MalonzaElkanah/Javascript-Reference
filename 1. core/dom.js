@@ -46,3 +46,21 @@ alert(feelings[1].getAttribute("value"));
 var greeting = document.getElementById("greeting");
 alert(greeting.innerHTML); //shows "Hello World" alert
 
+
+//3. Browser events
+	//Browsers provide you with programmatic means to react when an event occurs called listeners.
+
+	//3.1 addEventListener
+//This function registers its second argument as a callback function.
+//This callback is executed when the event specified in the first argument is triggered.
+'<button id="Bigbutton" >Submit</button>'
+'<p>No handler here.</p>'
+'<script>'
+	var button = document.getElementById("#Bigbutton");
+	button.addEventListener("click", function() {
+		console.log("Button clicked.");
+	});
+'</script>'
+
+
+
